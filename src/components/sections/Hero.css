@@ -7,6 +7,8 @@
   position: relative;
   overflow: hidden;
   padding: 0 2rem;
+  background: linear-gradient(135deg, rgba(5, 5, 5, 1) 0%, rgba(15, 15, 25, 0.5) 100%);
+  z-index: 1;
 }
 
 .hero-content {
@@ -21,44 +23,80 @@
   letter-spacing: -2px;
   margin-bottom: 1.5rem;
   font-weight: 800;
-}
-
-.text-gradient {
-  background: linear-gradient(135deg, #fff 0%, #444 100%);
+  animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  background: linear-gradient(135deg, #fcfcfc 0%, #999 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
+.text-gradient {
+  background: linear-gradient(135deg, #fff 0%, #4da6ff 50%, #0066ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: subtle-glow 3s ease-in-out infinite;
+}
+
+@keyframes subtle-glow {
+  0%, 100% { filter: drop-shadow(0 0 0px rgba(77, 166, 255, 0)); }
+  50% { filter: drop-shadow(0 0 8px rgba(77, 166, 255, 0.4)); }
+}
+
 .hero p {
   font-size: clamp(1rem, 2vw, 1.25rem);
   color: var(--text-muted);
-  line-height: 1.6;
+  line-height: 1.8;
   max-width: 600px;
   margin: 0 auto 2.8rem;
   font-weight: 300;
+  animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+  letter-spacing: 0.5px;
 }
 
 .hero-actions {
   display: flex;
   gap: 1rem;
   justify-content: center;
+  animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
 }
 
 .btn-primary {
-  background: var(--text-main);
+  background: linear-gradient(135deg, #fcfcfc 0%, #e8e8e8 100%);
   color: var(--bg-home);
   padding: 1rem 2.5rem;
   border-radius: 50px;
   text-decoration: none;
   font-weight: 600;
-  transition: all 0.3s ease;
   font-size: 1.05rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-primary:hover::before {
+  left: 100%;
 }
 
 .btn-primary:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 30px rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2), 0 0 20px rgba(77, 166, 255, 0.1);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
 }
 
 .hero-glow {
@@ -68,7 +106,19 @@
   transform: translate(-50%, -50%);
   width: 50vw;
   height: 50vw;
-  background: radial-gradient(circle, rgba(255,255,255,0.02) 0%, rgba(0,0,0,0) 60%);
+  background: radial-gradient(circle, rgba(77, 166, 255, 0.05) 0%, rgba(0, 0, 0, 0) 70%);
   z-index: 1;
   pointer-events: none;
+  animation: pulse-glow 4s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
 }
