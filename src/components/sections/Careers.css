@@ -1,7 +1,6 @@
 .careers {
   padding: 10rem 2rem;
-  background: linear-gradient(180deg, #0a0a0a 0%, #050505 100%);
-  border-top: 1px solid var(--border-light);
+  background: transparent;
   position: relative;
   overflow: hidden;
   z-index: 1;

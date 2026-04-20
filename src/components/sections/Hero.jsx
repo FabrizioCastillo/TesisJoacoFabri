@@ -18,7 +18,7 @@ const Hero = () => {
           <span className="text-gradient">línea por línea.</span>
         </h1>
         <p className="fade-in-up delay-1">
-          Soluciones de software de elite para empresas que buscan liderar su industria. Minimalismo, performance e impacto garantizado.
+          Soluciones de software de elite para empresas que buscan liderar su industria. Performance e impacto garantizado.
         </p>
         <div className="hero-actions fade-in-up delay-2">
           <a href="#careers" onClick={handleScrollToCareers} className="btn-primary">Sumate al equipo</a>
