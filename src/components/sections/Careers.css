@@ -127,7 +127,7 @@
 .btn-mailto:hover {
   transform: translateY(-3px);
   background: linear-gradient(135deg, #fff 0%, #f0f0f0 100%);
-  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2), 0 0 20px rgba(100, 180, 255, 0.15);
+  box-shadow: 0 2px 1px rgba(255, 255, 255, 0.2), 0 0 20px rgba(100, 180, 255, 0.15);
 }
 
 .btn-mailto:active {
