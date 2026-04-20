@@ -1,0 +1,81 @@
+.careers {
+  padding: 10rem 2rem;
+  background: #080808;
+  border-top: 1px solid var(--border-light);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.careers-content {
+  max-width: 650px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.careers h2 {
+  font-size: 2.8rem;
+  font-weight: 800;
+  margin-bottom: 1.2rem;
+  letter-spacing: -1px;
+}
+
+.careers p {
+  color: var(--text-muted);
+  font-size: 1.15rem;
+  line-height: 1.7;
+  margin-bottom: 4rem;
+  font-weight: 300;
+}
+
+.cta-wrapper {
+  background: #0c0c0c;
+  border: 1px solid var(--border-light);
+  border-radius: 20px;
+  padding: 4rem 2rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  transition: all 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cta-wrapper:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-5px);
+}
+
+.btn-mailto {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--text-main);
+  color: var(--bg-home);
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 1.2rem 2.5rem;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  margin-bottom: 1.5rem;
+}
+
+.btn-mailto:hover {
+  transform: scale(1.05);
+  background: #ddd;
+  box-shadow: 0 0 30px rgba(255,255,255,0.15);
+}
+
+.subtext {
+  font-size: 0.95rem !important;
+  color: #777 !important;
+  margin-bottom: 0 !important;
+}
+
+.subtext strong {
+  display: block;
+  margin-top: 0.5rem;
+  color: #aaa;
+}
