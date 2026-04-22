@@ -7,7 +7,7 @@
   position: relative;
   overflow: hidden;
   padding: 0 2rem;
-  background: linear-gradient(135deg, rgba(5, 5, 5, 1) 0%, rgba(15, 15, 25, 0.5) 100%);
+  background: transparent;
   z-index: 1;
 }
 
@@ -23,7 +23,6 @@
   letter-spacing: -2px;
   margin-bottom: 1.5rem;
   font-weight: 800;
-  animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   background: linear-gradient(135deg, #fcfcfc 0%, #999 100%);
   -webkit-background-clip: text;
   background-clip: text;
@@ -50,7 +49,6 @@
   max-width: 600px;
   margin: 0 auto 2.8rem;
   font-weight: 300;
-  animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
   letter-spacing: 0.5px;
 }
 
@@ -58,7 +56,6 @@
   display: flex;
   gap: 1rem;
   justify-content: center;
-  animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
 }
 
 .btn-primary {

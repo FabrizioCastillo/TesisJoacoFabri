@@ -1,25 +1,16 @@
 /* Global smooth transitions and refinements */
 
-/* Scroll behavior enhancements */
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
 }
 
-/* Enhanced Focus States */
 *:focus-visible {
   outline: 2px solid rgba(100, 180, 255, 0.5);
   outline-offset: 2px;
   border-radius: 4px;
 }
 
-/* Refined Link Transitions */
-a {
-  position: relative;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* Text Selection Enhancement */
 ::selection {
   background: rgba(100, 180, 255, 0.2);
   color: #fff;
@@ -30,30 +21,28 @@ a {
   color: #fff;
 }
 
-/* Smooth Transitions for all elements */
-* {
-  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
-}
-
-/* Button / Interactive element base styles */
 button, a[href], input[type="submit"] {
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Remove transition from elements that shouldn't have it */
 .particles-container *, .particle {
   transition: none !important;
 }
 
-/* Subtle entrance animations for sections */
+/* Soft reveal for sections (container-level, non-disruptive) */
 section {
-  animation: sectionFadeIn 0.8s ease-out;
+  opacity: 0;
+  animation: sectionFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes sectionFadeIn {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
@@ -61,32 +50,15 @@ section {
   }
 }
 
-/* Enhanced Hover States */
-button:hover, a:hover {
-  transform: translateY(-2px);
-}
-
-/* Active State Feedback */
-button:active, a:active {
-  transform: translateY(0);
-}
-
-/* Image Loading Enhancement */
 img {
   transition: opacity 0.3s ease;
 }
 
-/* Loading State */
 @keyframes shimmer {
-  0% {
-    background-position: -1000px 0;
-  }
-  100% {
-    background-position: 1000px 0;
-  }
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
 }
 
-/* Code/Preformatted Text */
 pre, code {
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
   background: rgba(255, 255, 255, 0.05);
@@ -95,73 +67,72 @@ pre, code {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Subtle animations on load */
 @keyframes softGlow {
-  0%, 100% {
-    box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
-  }
-  50% {
-    box-shadow: 0 0 15px rgba(100, 180, 255, 0.2);
-  }
+  0%, 100% { box-shadow: 0 0 5px rgba(255, 255, 255, 0.1); }
+  50% { box-shadow: 0 0 15px rgba(100, 180, 255, 0.2); }
 }
 
-/* Refined Card Animations */
-.card, .service-card, .cta-wrapper {
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* Enhance line decorations */
 hr, .divider {
   border: none;
   height: 1px;
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
 }
 
-/* Tooltip animations */
-[data-tooltip] {
-  position: relative;
-}
-
-[data-tooltip]::after {
-  content: attr(data-tooltip);
-  position: absolute;
-  bottom: 125%;
-  left: 50%;
-  transform: translateX(-50%) translateY(10px);
-  background: rgba(0, 0, 0, 0.8);
-  color: #fff;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  font-size: 0.85rem;
-  white-space: nowrap;
-  pointer-events: none;
-  opacity: 0;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  z-index: 1000;
-}
-
-[data-tooltip]:hover::after {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-}
-
-/* Refined text rendering */
 body, body * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
 
-/* Smooth color transitions */
 .text-gradient {
   animation: subtle-glow 3s ease-in-out infinite;
 }
 
 @keyframes subtle-glow {
-  0%, 100% {
-    filter: drop-shadow(0 0 0px rgba(77, 166, 255, 0));
-  }
-  50% {
-    filter: drop-shadow(0 0 8px rgba(77, 166, 255, 0.4));
-  }
+  0%, 100% { filter: drop-shadow(0 0 0px rgba(77, 166, 255, 0)); }
+  50% { filter: drop-shadow(0 0 8px rgba(77, 166, 255, 0.4)); }
+}
+
+/* ============================================== */
+/* Scroll progress bar — minimalist, 2px, top     */
+/* ============================================== */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  z-index: 1001;
+  pointer-events: none;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.scroll-progress-bar {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(77, 166, 255, 0.0) 0%,
+    rgba(77, 166, 255, 0.8) 30%,
+    rgba(150, 200, 255, 1) 70%,
+    rgba(255, 255, 255, 0.9) 100%
+  );
+  transform-origin: left center;
+  transform: scaleX(0);
+  will-change: transform;
+  box-shadow: 0 0 12px rgba(100, 180, 255, 0.5),
+              0 0 24px rgba(77, 166, 255, 0.3);
+}
+
+/* ============================================== */
+/* Grain overlay — ultra subtle premium texture   */
+/* ============================================== */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.6 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
 }
