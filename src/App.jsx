@@ -4,6 +4,7 @@ import Particles from './components/layout/Particles';
 import Hero from './components/sections/Hero';
 import About from './components/sections/About';
 import Careers from './components/sections/Careers';
+import Footer from './components/layout/Footer';
 import './App.css';
 import './animations.css';
 
@@ -68,6 +69,7 @@ function App() {
       <Hero />
       <About />
       <Careers />
+      <Footer />
     </>
   );
 }
