@@ -5,8 +5,8 @@ import './AdminPanel.css';
 
 Chart.register(...registerables);
 
-const WEBHOOK_DATA = 'https://TU-INSTANCIA-N8N/webhook/dashboard-datos';
-const WEBHOOK_HIRE = 'https://TU-INSTANCIA-N8N/webhook/marcar-contratado';
+const WEBHOOK_DATA = '/n8n/webhook/dashboard-datos';
+const WEBHOOK_HIRE = '/n8n/webhook/marcar-contratado';
 
 
 export default function AdminPanel({ onClose }) {

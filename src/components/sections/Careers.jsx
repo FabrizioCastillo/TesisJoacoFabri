@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import './Careers.css';
 
-const WEBHOOK_URL = 'https://TU-INSTANCIA-N8N/webhook/postulacion';
+const WEBHOOK_URL = '/n8n/webhook/postulacion';
 
 const Careers = () => {
   const [nombre, setNombre] = useState('');
