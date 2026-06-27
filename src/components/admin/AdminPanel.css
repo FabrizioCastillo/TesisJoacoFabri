@@ -1,0 +1,344 @@
+.ap-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1001;
+  overflow-y: auto;
+  background:
+    radial-gradient(900px 500px at 5% -5%, rgba(77, 166, 255, 0.07), transparent 55%),
+    radial-gradient(700px 400px at 95% 10%, rgba(0, 102, 255, 0.06), transparent 50%),
+    var(--bg-home);
+  font-family: 'Outfit', sans-serif;
+  color: var(--text-main);
+  animation: ap-enter 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes ap-enter {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Navbar bar ─────────────────────────────────────────── */
+.ap-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: linear-gradient(180deg, rgba(5,5,5,0.85) 0%, rgba(5,5,5,0.5) 100%);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border-light);
+  padding: 1rem 0;
+}
+
+.ap-navbar-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.ap-navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* Same text logo as Navbar */
+.ap-site-logo {
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, #fcfcfc 0%, #aaa 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1;
+}
+
+.ap-site-logo span {
+  -webkit-text-fill-color: #555;
+}
+
+.ap-divider {
+  width: 1px;
+  height: 18px;
+  background: rgba(255, 255, 255, 0.12);
+  flex: none;
+}
+
+.ap-panel-label {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0.3px;
+}
+
+.ap-navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ap-status {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.ap-pill {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ffd166;
+  box-shadow: 0 0 7px #ffd166;
+  flex: none;
+}
+
+.ap-pill--live {
+  background: #2fd180;
+  box-shadow: 0 0 7px #2fd180;
+}
+
+.ap-pill--err {
+  background: #ff7a7a;
+  box-shadow: 0 0 7px #ff7a7a;
+}
+
+.ap-ghost-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-main);
+  padding: 7px 14px;
+  border-radius: 40px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  font-family: 'Outfit', sans-serif;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ap-ghost-btn:hover:not(:disabled) {
+  border-color: rgba(77, 166, 255, 0.4);
+  background: rgba(77, 166, 255, 0.06);
+  color: #4da6ff;
+}
+
+.ap-ghost-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+.ap-spin { animation: ap-rotate 0.7s linear infinite; }
+
+@keyframes ap-rotate { to { transform: rotate(360deg); } }
+
+.ap-close-btn {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 9px;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ap-close-btn:hover {
+  color: var(--text-main);
+  border-color: rgba(255, 107, 107, 0.45);
+  background: rgba(255, 107, 107, 0.07);
+}
+
+/* ── Content wrap ───────────────────────────────────────── */
+.ap-wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 3.5rem 2rem 5rem;
+}
+
+/* Section heading — matches main sections */
+.ap-heading {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.ap-heading h2 {
+  font-size: 2.4rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+  margin-bottom: 0.7rem;
+  background: linear-gradient(135deg, #fcfcfc 0%, #4da6ff 50%, #0066ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.ap-heading p {
+  color: var(--text-muted);
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+/* ── KPI grid ───────────────────────────────────────────── */
+.ap-kpis {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 900px) { .ap-kpis { grid-template-columns: repeat(2, 1fr); } }
+
+.ap-kpi {
+  background: linear-gradient(180deg, rgba(14,14,18,0.7) 0%, rgba(20,20,32,0.7) 100%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(100, 180, 255, 0.12);
+  border-radius: 18px;
+  padding: 20px;
+  transition: border-color 0.4s cubic-bezier(0.16,1,0.3,1),
+              box-shadow 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+
+.ap-kpi:hover {
+  border-color: rgba(100, 180, 255, 0.25);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+}
+
+.ap-kpi-label {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.ap-kpi-value {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+  color: var(--text-main);
+}
+
+.ap-kpi-value--ok { color: #2fd180; }
+.ap-kpi-value--ac { color: #4da6ff; }
+
+/* ── Charts ─────────────────────────────────────────────── */
+.ap-charts {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+@media (max-width: 900px) { .ap-charts { grid-template-columns: 1fr; } }
+
+/* ── Shared card — same as .c-card in Careers ───────────── */
+.ap-card {
+  background: linear-gradient(180deg, rgba(14,14,18,0.7) 0%, rgba(20,20,32,0.7) 100%);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(100, 180, 255, 0.12);
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.04) inset,
+    0 20px 60px rgba(0,0,0,0.4);
+  margin-bottom: 14px;
+  transition: border-color 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+
+.ap-card:last-child { margin-bottom: 0; }
+
+.ap-card:hover {
+  border-color: rgba(100, 180, 255, 0.22);
+}
+
+.ap-card-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin: 0 0 18px;
+  letter-spacing: 0.1px;
+}
+
+.ap-card canvas { max-height: 240px; }
+
+/* ── Table ──────────────────────────────────────────────── */
+.ap-table-wrap { overflow-x: auto; }
+
+.ap-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.ap-table th {
+  text-align: left;
+  padding: 9px 12px;
+  border-bottom: 1px solid rgba(100, 180, 255, 0.1);
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  white-space: nowrap;
+}
+
+.ap-table td {
+  text-align: left;
+  padding: 12px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  color: rgba(252,252,252,0.82);
+}
+
+.ap-table tr:last-child td { border-bottom: none; }
+.ap-table tr:hover td { background: rgba(77,166,255,0.04); }
+
+/* ── Badges ─────────────────────────────────────────────── */
+.ap-badge {
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.ap-badge--apto   { background: rgba(47,209,128,0.12); color: #2fd180; }
+.ap-badge--noapto { background: rgba(255,107,107,0.12); color: #ff7a7a; }
+.ap-badge--pend   { background: rgba(255,209,102,0.12); color: #ffd166; }
+.ap-badge--contr  { background: rgba(77,166,255,0.12);  color: #4da6ff; }
+
+.ap-muted { color: var(--text-muted); font-size: 12px; }
+
+/* ── Hire button — same gradient as .c-btn ──────────────── */
+.ap-hire-btn {
+  background: linear-gradient(135deg, #4da6ff, #0066ff);
+  border: 0;
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: 'Outfit', sans-serif;
+  box-shadow: 0 4px 14px rgba(77,166,255,0.3);
+  transition: transform 0.25s cubic-bezier(0.16,1,0.3,1),
+              box-shadow 0.25s cubic-bezier(0.16,1,0.3,1);
+  white-space: nowrap;
+}
+
+.ap-hire-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(77,166,255,0.45);
+}
+
+.ap-hire-btn:disabled { opacity: 0.45; cursor: not-allowed; }

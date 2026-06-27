@@ -25,6 +25,7 @@ Single-page React 19 application built with Vite. All content lives on one scrol
 3. `Hero` — main hero section with CTA that scrolls to `#careers`
 4. `About` — 3 service cards using lucide-react icons (`MonitorPlay`, `Code2`, `Zap`)
 5. `Careers` — hiring section with a mailto link (`tesisn8n6@gmail.com`)
+6. `Footer` — brand name, copyright year, and anchor links to `#about`, `#careers`, `mailto:`
 
 **Structure:**
 - `src/components/layout/` — Navbar, Particles
@@ -40,5 +41,10 @@ Single-page React 19 application built with Vite. All content lives on one scrol
 - Glass-morphism on Navbar uses `backdrop-filter: blur()`
 
 **Navigation:** Navbar links and the Hero CTA use `document.getElementById().scrollIntoView({ behavior: 'smooth' })` — no React Router.
+
+**App.jsx global behaviors:**
+- `scroll-progress` bar: smooth lerp (factor 0.12) via `requestAnimationFrame`, driven by `useRef` — not state.
+- `IntersectionObserver` in `App.jsx` adds `.in-view` class to elements with `.fade-in-up`, `.fade-in-down`, `.fade-in`, `.scale-in` — triggers CSS animations once, then unobserves.
+- `grain-overlay` div provides static noise texture over entire page.
 
 **State:** Only `Navbar.jsx` uses `useState` (scroll position). No global state, Context, or external state manager.

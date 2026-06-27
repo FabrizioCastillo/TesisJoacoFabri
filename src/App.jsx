@@ -1,14 +1,16 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Navbar from './components/layout/Navbar';
 import Particles from './components/layout/Particles';
 import Hero from './components/sections/Hero';
 import About from './components/sections/About';
 import Careers from './components/sections/Careers';
 import Footer from './components/layout/Footer';
+import AdminPanel from './components/admin/AdminPanel';
 import './App.css';
 import './animations.css';
 
 function App() {
+  const [showAdmin, setShowAdmin] = useState(false);
   const progressRef = useRef(null);
 
   useEffect(() => {
@@ -60,12 +62,13 @@ function App() {
 
   return (
     <>
+      {showAdmin && <AdminPanel onClose={() => setShowAdmin(false)} />}
       <div className="scroll-progress" aria-hidden="true">
         <div className="scroll-progress-bar" ref={progressRef} />
       </div>
       <div className="grain-overlay" aria-hidden="true" />
       <Particles />
-      <Navbar />
+      <Navbar onAdminClick={() => setShowAdmin(true)} />
       <Hero />
       <About />
       <Careers />

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { LayoutDashboard } from 'lucide-react';
 import './Navbar.css';
 
-const Navbar = () => {
+const Navbar = ({ onAdminClick }) => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -19,6 +20,9 @@ const Navbar = () => {
         <div className="nav-links">
           <a href="#about" className="nav-link">Sobre nosotros</a>
           <a href="#careers" className="nav-btn">Trabajá con nosotros</a>
+          <button className="nav-admin-btn" onClick={onAdminClick} title="Panel de administración">
+            <LayoutDashboard size={17} />
+          </button>
         </div>
       </div>
     </nav>
