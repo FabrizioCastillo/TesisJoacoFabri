@@ -1,0 +1,268 @@
+{
+  "name": "RRHH-Alta-Empleados",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "documentId": {
+          "__rl": true,
+          "value": "16SVwd0K-GTwAyT6QgE_2bYrSjoHFDGtgDjESJ4UyrOc",
+          "mode": "list",
+          "cachedResultName": "Postulaciones",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/16SVwd0K-GTwAyT6QgE_2bYrSjoHFDGtgDjESJ4UyrOc/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1346130844,
+          "mode": "list",
+          "cachedResultName": "Postulados",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/16SVwd0K-GTwAyT6QgE_2bYrSjoHFDGtgDjESJ4UyrOc/edit#gid=1346130844"
+        },
+        "event": "rowUpdate",
+        "options": {}
+      },
+      "id": "458eb1bc-2415-486c-9434-199561b49701",
+      "name": "Detectar cambio en Postulaciones",
+      "type": "n8n-nodes-base.googleSheetsTrigger",
+      "typeVersion": 1,
+      "position": [
+        -432,
+        -96
+      ],
+      "credentials": {
+        "googleSheetsTriggerOAuth2Api": {
+          "id": "pgktR01Yzed7gVoW",
+          "name": "Google Sheets Trigger account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "\n// Deja pasar solo las filas cuyo estado quedó en \"Fin del Onboarding\"\nreturn $input.all().filter(item => {\n  const estado = (item.json[\"Estado de la postulación\"]||\"\").toString().trim().toLowerCase();\n  return estado === \"fin del onboarding\";\n});\n"
+      },
+      "id": "0481f18f-6c5c-4745-8f7a-5a6b6f4ea60c",
+      "name": "Solo Fin del Onboarding",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -192,
+        -96
+      ]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "16SVwd0K-GTwAyT6QgE_2bYrSjoHFDGtgDjESJ4UyrOc",
+          "mode": "list",
+          "cachedResultName": "Postulaciones",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/16SVwd0K-GTwAyT6QgE_2bYrSjoHFDGtgDjESJ4UyrOc/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1346130844,
+          "mode": "list",
+          "cachedResultName": "Postulados",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/16SVwd0K-GTwAyT6QgE_2bYrSjoHFDGtgDjESJ4UyrOc/edit#gid=1346130844"
+        },
+        "options": {}
+      },
+      "id": "8e251c2e-a006-4d4b-a33f-e65544acb367",
+      "name": "Leer Empleados",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        48,
+        -96
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "mxDHS4LdVr42xQan",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "\nconst nuevos = $('Solo Fin del Onboarding').all().map(i => i.json);\nconst empleados = $input.all().map(i => i.json);\nconst yaExisten = new Set(empleados.map(e => (e[\"ID\"]||\"\").toString().trim()));\n\nconst norm = s => (s||\"\").toString().trim();\nconst aAgregar = [];\nfor (const p of nuevos){\n  const id = norm(p[\"ID\"]);\n  if (!id || yaExisten.has(id)) continue; // ya está -> no duplicar\n  aAgregar.push({\n    \"ID\": id,\n    \"Apellido y Nombre\": norm(p[\"Apellido y Nombre\"]),\n    \"Puesto\": norm(p[\"Puesto al que se postula\"]),\n    \"Correo\": norm(p[\"Correo electronico \"] || p[\"Correo electronico\"]),\n    \"Telefono\": norm(p[\"Numero de telefono \"] || p[\"Numero de telefono\"]),\n    \"Fecha de alta\": new Date().toISOString().slice(0,10)\n  });\n}\nreturn $input.all().filter(item => {\n  const estado = (item.json[\"Estado de la postulación\"]||\"\")\n    .toString().trim().toLowerCase();\n  return estado.includes(\"fin del onboarding\")\n      || estado.includes(\"onboarding finalizado\")\n      || estado.includes(\"finalizado\");\n});\n"
+      },
+      "id": "e8a80870-3a8d-4acc-8470-a3c6579798e4",
+      "name": "Filtrar Duplicados",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        288,
+        -96
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "16SVwd0K-GTwAyT6QgE_2bYrSjoHFDGtgDjESJ4UyrOc",
+          "mode": "list",
+          "cachedResultName": "Postulaciones",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/16SVwd0K-GTwAyT6QgE_2bYrSjoHFDGtgDjESJ4UyrOc/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 490999390,
+          "mode": "list",
+          "cachedResultName": "Empleados",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/16SVwd0K-GTwAyT6QgE_2bYrSjoHFDGtgDjESJ4UyrOc/edit#gid=490999390"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "ID": "={{ $json.ID }}",
+            "Apellido y Nombre": "={{ $json['Apellido y Nombre'] }}",
+            "Puesto": "={{ $json['Puesto al que se postula'] }}",
+            "Correo": "={{ $json['Correo electronico '] }}",
+            "Telefono": "={{ $json['Numero de telefono '] }}",
+            "Fecha de alta": "={{ $now.format('yyyy-MM-dd') }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Apellido y Nombre",
+              "displayName": "Apellido y Nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Puesto",
+              "displayName": "Puesto",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Correo",
+              "displayName": "Correo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Telefono",
+              "displayName": "Telefono",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Fecha de alta",
+              "displayName": "Fecha de alta",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "e5237faa-e54c-4bac-9884-2ef5de7570ca",
+      "name": "Agregar a Empleados",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        528,
+        -96
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "mxDHS4LdVr42xQan",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Detectar cambio en Postulaciones": {
+      "main": [
+        [
+          {
+            "node": "Solo Fin del Onboarding",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Solo Fin del Onboarding": {
+      "main": [
+        [
+          {
+            "node": "Leer Empleados",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Leer Empleados": {
+      "main": [
+        [
+          {
+            "node": "Filtrar Duplicados",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filtrar Duplicados": {
+      "main": [
+        [
+          {
+            "node": "Agregar a Empleados",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "03d25fb7-1239-4389-b657-610dc5a0114e",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "0612b7a157850fcee519145ff2b360e906c9c27614cf6427d35945296293cf8e"
+  },
+  "id": "tpttllxBK9IKDX0R",
+  "tags": []
+}
